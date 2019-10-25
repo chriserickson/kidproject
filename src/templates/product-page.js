@@ -1,11 +1,11 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { graphql } from 'gatsby'
-import Layout from '../components/Layout'
-import Features from '../components/Features'
-import Testimonials from '../components/Testimonials'
-import Pricing from '../components/Pricing'
-import PreviewCompatibleImage from '../components/PreviewCompatibleImage'
+import React from "react";
+import PropTypes from "prop-types";
+import { graphql } from "gatsby";
+import Layout from "../components/Layout";
+import Features from "../components/Features";
+import Testimonials from "../components/Testimonials";
+import Pricing from "../components/Pricing";
+import PreviewCompatibleImage from "../components/PreviewCompatibleImage";
 
 export const ProductPageTemplate = ({
   image,
@@ -16,24 +16,22 @@ export const ProductPageTemplate = ({
   main,
   testimonials,
   fullImage,
-  pricing,
+  pricing
 }) => (
   <div className="content">
     <div
       className="full-width-image-container margin-top-0"
       style={{
-        backgroundImage: `url(${
-          !!image.childImageSharp ? image.childImageSharp.fluid.src : image
-        })`,
+        backgroundImage: `url(${image.relativePath})`
       }}
     >
       <h2
         className="has-text-weight-bold is-size-1"
         style={{
-          boxShadow: '0.5rem 0 0 #f40, -0.5rem 0 0 #f40',
-          backgroundColor: '#f40',
-          color: 'white',
-          padding: '1rem',
+          boxShadow: "0.5rem 0 0 #f40, -0.5rem 0 0 #f40",
+          backgroundColor: "#f40",
+          color: "white",
+          padding: "1rem"
         }}
       >
         {title}
@@ -84,11 +82,7 @@ export const ProductPageTemplate = ({
               <div
                 className="full-width-image-container"
                 style={{
-                  backgroundImage: `url(${
-                    fullImage.childImageSharp
-                      ? fullImage.childImageSharp.fluid.src
-                      : fullImage
-                  })`,
+                  backgroundImage: `url(${fullImage.relativePath})`
                 }}
               />
               <h2 className="has-text-weight-semibold is-size-2">
@@ -102,7 +96,7 @@ export const ProductPageTemplate = ({
       </div>
     </section>
   </div>
-)
+);
 
 ProductPageTemplate.propTypes = {
   image: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
@@ -110,26 +104,26 @@ ProductPageTemplate.propTypes = {
   heading: PropTypes.string,
   description: PropTypes.string,
   intro: PropTypes.shape({
-    blurbs: PropTypes.array,
+    blurbs: PropTypes.array
   }),
   main: PropTypes.shape({
     heading: PropTypes.string,
     description: PropTypes.string,
     image1: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
     image2: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-    image3: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
+    image3: PropTypes.oneOfType([PropTypes.object, PropTypes.string])
   }),
   testimonials: PropTypes.array,
   fullImage: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
   pricing: PropTypes.shape({
     heading: PropTypes.string,
     description: PropTypes.string,
-    plans: PropTypes.array,
-  }),
-}
+    plans: PropTypes.array
+  })
+};
 
 const ProductPage = ({ data }) => {
-  const { frontmatter } = data.markdownRemark
+  const { frontmatter } = data.markdownRemark;
 
   return (
     <Layout>
@@ -145,18 +139,18 @@ const ProductPage = ({ data }) => {
         pricing={frontmatter.pricing}
       />
     </Layout>
-  )
-}
+  );
+};
 
 ProductPage.propTypes = {
   data: PropTypes.shape({
     markdownRemark: PropTypes.shape({
-      frontmatter: PropTypes.object,
-    }),
-  }),
-}
+      frontmatter: PropTypes.object
+    })
+  })
+};
 
-export default ProductPage
+export default ProductPage;
 
 export const productPageQuery = graphql`
   query ProductPage($id: String!) {
@@ -164,22 +158,14 @@ export const productPageQuery = graphql`
       frontmatter {
         title
         image {
-          childImageSharp {
-            fluid(maxWidth: 2048, quality: 100) {
-              ...GatsbyImageSharpFluid
-            }
-          }
+          relativePath
         }
         heading
         description
         intro {
           blurbs {
             image {
-              childImageSharp {
-                fluid(maxWidth: 240, quality: 64) {
-                  ...GatsbyImageSharpFluid
-                }
-              }
+              relativePath
             }
             text
           }
@@ -192,31 +178,19 @@ export const productPageQuery = graphql`
           image1 {
             alt
             image {
-              childImageSharp {
-                fluid(maxWidth: 526, quality: 92) {
-                  ...GatsbyImageSharpFluid
-                }
-              }
+              relativePath
             }
           }
           image2 {
             alt
             image {
-              childImageSharp {
-                fluid(maxWidth: 526, quality: 92) {
-                  ...GatsbyImageSharpFluid
-                }
-              }
+              relativePath
             }
           }
           image3 {
             alt
             image {
-              childImageSharp {
-                fluid(maxWidth: 1075, quality: 72) {
-                  ...GatsbyImageSharpFluid
-                }
-              }
+              relativePath
             }
           }
         }
@@ -225,11 +199,7 @@ export const productPageQuery = graphql`
           quote
         }
         full_image {
-          childImageSharp {
-            fluid(maxWidth: 2048, quality: 100) {
-              ...GatsbyImageSharpFluid
-            }
-          }
+          relativePath
         }
         pricing {
           heading
@@ -244,4 +214,4 @@ export const productPageQuery = graphql`
       }
     }
   }
-`
+`;
