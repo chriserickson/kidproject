@@ -7,14 +7,14 @@ module.exports = {
   plugins: [
     "gatsby-plugin-react-helmet",
     "gatsby-plugin-sass",
-    {
-      // keep as first gatsby-source-filesystem plugin for gatsby image support
-      resolve: "gatsby-source-filesystem",
-      options: {
-        path: `${__dirname}/static/img`,
-        name: "uploads"
-      }
-    },
+    // {
+    //   // keep as first gatsby-source-filesystem plugin for gatsby image support
+    //   resolve: 'gatsby-source-filesystem',
+    //   options: {
+    //     path: `${__dirname}/static/img`,
+    //     name: 'uploads',
+    //   },
+    // },
     {
       resolve: "gatsby-source-filesystem",
       options: {
@@ -29,6 +29,8 @@ module.exports = {
         name: "images"
       }
     },
+    "gatsby-plugin-sharp",
+    "gatsby-transformer-sharp",
     {
       resolve: "gatsby-transformer-remark",
       options: {
